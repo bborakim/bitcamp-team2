@@ -2,10 +2,6 @@ package bitcamp.java89.ems.server.vo;
 
 import java.io.Serializable;
 
-/**
- * @author user_pc
- *
- */
 public class Curriculum implements Serializable {
   private static final long serialVersionUID = 1L;
   
@@ -19,7 +15,9 @@ public class Curriculum implements Serializable {
   protected int time;
   protected int term;
 
-  public Curriculum() {}
+  public Curriculum() {
+    super();
+  }
   
 
 
