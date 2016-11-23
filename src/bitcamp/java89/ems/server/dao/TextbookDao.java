@@ -44,10 +44,11 @@ public class TextbookDao {
       in = new ObjectInputStream(in0);
       
       list = (ArrayList<Textbook>)in.readObject();
-
+  
+      
       // 파일 생성 후 데이터 없음 or 파일을 모두 읽음
     } catch (Exception e) {
-      e.printStackTrace();
+
       System.out.println("데이터 로딩 중 오류 발생!");
       list = new ArrayList<>();
     } finally {
@@ -72,7 +73,7 @@ public class TextbookDao {
     return this.list;
   }
   
-  public ArrayList<Textbook> getListByName(String name) {
+  public ArrayList<Textbook> getListByTitle(String name) {
     ArrayList<Textbook> results = new ArrayList<>();
     
     for (Textbook textbook : list) {
