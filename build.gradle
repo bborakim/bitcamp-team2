@@ -1,0 +1,26 @@
+// 자바 사용 플러그인
+apply plugin: 'java'
+// 이클립스 사용 플러그인 추가
+apply plugin: 'eclipse'
+
+/* Gradle의 기본 폴더구조는 다음과 같다
+project폴더/src
+                /main
+                      /java
+                      /resources
+                      /webapp
+                /test
+                      /java
+                      /resources
+*/
+
+sourceSets {
+    main  {
+        java  {
+              srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+        }
+    }
+}
