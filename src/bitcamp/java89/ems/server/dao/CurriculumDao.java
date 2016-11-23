@@ -28,10 +28,6 @@ public class CurriculumDao {
   private CurriculumDao() {
     this.load();
   }
- 
-  public boolean isChanged() {
-    return changed;
-  }
   
   @SuppressWarnings("unchecked")
   private void load() {
@@ -63,8 +59,6 @@ public class CurriculumDao {
     
     out.writeObject(list);
     
-    changed = false;
-    
     out.close();
     out0.close();
   }
@@ -72,11 +66,7 @@ public class CurriculumDao {
   public ArrayList<Curriculum> getList() {
     return this.list;
   }
-  /*
-  public ArrayList<Curriculum> getOne() {
-    return this.list;
-  }
-  */
+  
   public ArrayList<Curriculum> getByName(String curriculumName) {
     ArrayList<Curriculum> searchList = new ArrayList<>();
     
@@ -90,13 +80,14 @@ public class CurriculumDao {
   
   synchronized public void insert(Curriculum curriculum) {
     list.add(curriculum);
+    try {this.save();} catch (Exception e) {}
   }
   
   synchronized public void update(Curriculum curriculum) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getCurriculumName().equals(curriculum.getCurriculumName())) {
         list.set(i, curriculum);
-        changed = true;
+        try {this.save();} catch (Exception e) {}
         return;
       }
     }
@@ -105,7 +96,7 @@ public class CurriculumDao {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getCurriculumName().equals(curriculumName)) {
         list.remove(i);
-        changed = true;
+        try {this.save();} catch (Exception e) {}
         return;
       }
     }

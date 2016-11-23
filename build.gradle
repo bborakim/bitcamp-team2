@@ -16,13 +16,4 @@ project폴더/src
                     /resources
 */
 //만약 소스 폴더의 구조를 변경하고 싶다면 다음 설정을 추가하라.
-sourceSets {
-    main {
-        java {
-            srcDir 'src'
-        }
-        resources {
-            srcDir 'src'
-        }
-    }
-}
+
