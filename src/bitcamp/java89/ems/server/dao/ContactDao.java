@@ -14,7 +14,6 @@ public class ContactDao {
   static ContactDao obj;
   private String filename = "contact-v1.7.data";
   private ArrayList<Contact> list;
-  private boolean changed;
   
   public static ContactDao getInstance() {
     if (obj == null) {
