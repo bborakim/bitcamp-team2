@@ -8,6 +8,11 @@ import bitcamp.java89.ems.server.controller.ContactDeleteController;
 import bitcamp.java89.ems.server.controller.ContactListController;
 import bitcamp.java89.ems.server.controller.ContactUpdateController;
 import bitcamp.java89.ems.server.controller.ContactViewController;
+import bitcamp.java89.ems.server.controller.TextbookAddController;
+import bitcamp.java89.ems.server.controller.TextbookDeleteController;
+import bitcamp.java89.ems.server.controller.TextbookListController;
+import bitcamp.java89.ems.server.controller.TextbookUpdateController;
+import bitcamp.java89.ems.server.controller.TextbookViewController;
 
 public class EduAppServer {
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -18,6 +23,11 @@ public class EduAppServer {
     commandMap.put("contact/add", new ContactAddController());
     commandMap.put("contact/delete", new ContactDeleteController());
     commandMap.put("contact/update", new ContactUpdateController());
+    commandMap.put("textbook/add",  new TextbookAddController());
+    commandMap.put("textbook/list",  new TextbookListController());
+    commandMap.put("textbook/view",  new TextbookViewController());
+    commandMap.put("textbook/delete",  new TextbookDeleteController());
+    commandMap.put("textbook/update",  new TextbookUpdateController());
   }
   
   private void service() throws Exception {

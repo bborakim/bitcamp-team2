@@ -63,7 +63,7 @@ public class RequestThread extends Thread {
           
       }//while
     } catch (Exception e) { 
-      
+      e.printStackTrace();
     } finally {
       try {in.close();} catch (Exception e){}
       try {out.close();} catch (Exception e){}
