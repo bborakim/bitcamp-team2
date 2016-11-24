@@ -27,37 +27,30 @@ public class ContactDao {
   }
 
   @SuppressWarnings("unchecked")
-  private void load() {
-    FileInputStream in0 = null;
-    ObjectInputStream in = null;
-    
-    try {
-      in0 = new FileInputStream(this.filename);
-      in = new ObjectInputStream(in0);
-
+  private void load() {    
+    try (
+      ObjectInputStream in = new ObjectInputStream(
+                 new FileInputStream(this.filename));) {
+   
       list = (ArrayList<Contact>)in.readObject();
       
     } catch (EOFException e) {
     } catch (Exception e) {
       System.out.println("데이터 로딩 중 오류 발생!");
       list = new ArrayList<>();
-    } finally {
-      try {
-        in.close();
-        in0.close();
-      } catch (Exception e) {}
     }
   }
 
   public void save() throws Exception {
-    FileOutputStream out0 = new FileOutputStream(this.filename);
-    ObjectOutputStream out = new ObjectOutputStream(out0);
+    try (
+      ObjectOutputStream out = new ObjectOutputStream(
+                   new FileOutputStream(this.filename));) {
 
-    out.writeObject(list);
+      out.writeObject(list);
 
-
-    out.close();
-    out0.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
   
   public ArrayList<Contact> getList() {

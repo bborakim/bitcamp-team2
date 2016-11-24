@@ -15,9 +15,8 @@ import bitcamp.java89.ems.server.vo.Curriculum;
 
 public class CurriculumDao {
   static CurriculumDao obj;
-  private String filename = "curriculum-v1.7.data";
+  private String filename = "curriculum-v1.8.data";
   private ArrayList<Curriculum> list;
-  private boolean changed;
 
   public static CurriculumDao getInstance() {
     if (obj == null) {
@@ -31,12 +30,8 @@ public class CurriculumDao {
   
   @SuppressWarnings("unchecked")
   private void load() {
-    FileInputStream in0 = null;
-    ObjectInputStream in = null;
-
-    try {
-      in0 = new FileInputStream(this.filename);
-      in = new ObjectInputStream(in0);
+    try (
+      ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.filename));) {
 
       list = (ArrayList<Curriculum>)in.readObject();
       
@@ -44,23 +39,18 @@ public class CurriculumDao {
     } catch (Exception e) {
       System.out.println("강좌 데이터 로딩 중 오류 발생!");
       list = new ArrayList<>();
-    } finally {
-      try {
-        in.close();
-        in0.close();
-      } catch (Exception e) {
-      }
     }
   }
   
-  public void save() throws Exception{
-    FileOutputStream out0 = new FileOutputStream(this.filename);
-    ObjectOutputStream out = new ObjectOutputStream(out0);
+  public void save() throws Exception {
+    try (
+      ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.filename));) {
     
-    out.writeObject(list);
-    
-    out.close();
-    out0.close();
+      out.writeObject(list);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
   
   public ArrayList<Curriculum> getList() {
@@ -102,7 +92,6 @@ public class CurriculumDao {
     }
   }
   
-
   public boolean existCurriculumName(String curriculumName) {
     for (Curriculum curriculum : list) {
       if (curriculum.getCurriculumName().toLowerCase().equals(curriculumName.toLowerCase())) {
