@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import bitcamp.java89.ems.server.Command;
-import bitcamp.java89.ems.server.dao.ContactDao;
 import bitcamp.java89.ems.server.dao.TextbookDao;
 import bitcamp.java89.ems.server.vo.Textbook;
 
@@ -21,7 +20,7 @@ public class TextbookListController implements Command {
     ArrayList<Textbook> list = textbookDao.getList();
     for (Textbook textbook : list) {
       out.printf("%s, %s, %s, %d원, %d쪽, %d남음, %s,"
-          + " %s, %s",
+          + " %s, %s\n",
           textbook.getTitle(),
           textbook.getAuthor(),
           textbook.getPress(),

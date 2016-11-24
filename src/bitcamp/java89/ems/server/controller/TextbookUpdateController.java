@@ -16,7 +16,7 @@ public class TextbookUpdateController implements Command {
   }
 
   public void service(HashMap<String,String> paramMap, PrintStream out) {
-    if (textbookDao.existTitle(paramMap.get("title"))) {
+    if (!textbookDao.existTitle(paramMap.get("title"))) {
       out.println("입력하신 교재가 없습니다.");
       return;
     }

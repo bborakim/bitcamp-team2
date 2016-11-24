@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import bitcamp.java89.ems.server.Command;
 import bitcamp.java89.ems.server.dao.TextbookDao;
-import bitcamp.java89.ems.server.vo.Contact;
 import bitcamp.java89.ems.server.vo.Textbook;
 
 public class TextbookViewController implements Command {
@@ -18,7 +17,7 @@ public class TextbookViewController implements Command {
   }
 
   public void service(HashMap<String,String> paramMap, PrintStream out) {
-    ArrayList<Textbook> list = textbookDao.getListByTitle(paramMap.get("name"));
+    ArrayList<Textbook> list = textbookDao.getListByTitle(paramMap.get("title"));
     for (Textbook book : list) {
         out.println("-----------------------");
         out.println("교재명: " + book.getTitle());

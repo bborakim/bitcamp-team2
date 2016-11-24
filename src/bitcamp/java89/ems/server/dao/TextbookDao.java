@@ -3,7 +3,6 @@ package bitcamp.java89.ems.server.dao;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -28,15 +27,6 @@ public class TextbookDao {
   
   @SuppressWarnings("unchecked")
   private void load() {
-//    try {
-//      File file = new File(filename);
-//      if(!file.exists()) {
-//        file.createNewFile();
-//      }
-//    } catch (IOException e){
-//      System.out.println("파일을 정상적으로 로드하지 못했습니다.");
-//    }
-
     FileInputStream in0 = null;
     ObjectInputStream in = null;
     try {
@@ -47,8 +37,9 @@ public class TextbookDao {
   
       
       // 파일 생성 후 데이터 없음 or 파일을 모두 읽음
+    
+    } catch (EOFException e) {
     } catch (Exception e) {
-
       System.out.println("데이터 로딩 중 오류 발생!");
       list = new ArrayList<>();
     } finally {
