@@ -12,7 +12,7 @@ import bitcamp.java89.ems.server.vo.Curriculum;
 
 public class CurriculumAddController implements Command {
 
-  public void service(HashMap<String,String> paramMap, PrintStream out){
+  public void service(HashMap<String,String> paramMap, PrintStream out) {
     try {
       CurriculumDao curriculumDao = CurriculumDao.getInstance();
       if (curriculumDao.existCurriculumName(paramMap.get("name"))) {

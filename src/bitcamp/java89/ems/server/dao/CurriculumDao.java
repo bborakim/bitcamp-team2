@@ -25,7 +25,7 @@ public class CurriculumDao extends AbstractDao<Curriculum>{
   }
   
   private CurriculumDao() throws Exception {
-    super("contact -v1.9.data");
+    super("curriculum -v1.9.data");
   }
   
   public ArrayList<Curriculum> getList() {
