@@ -13,44 +13,19 @@ import java.util.Scanner;
 import bitcamp.java89.ems.server.vo.Contact;
 import bitcamp.java89.ems.server.vo.Curriculum;
 
-public class CurriculumDao {
+public class CurriculumDao extends AbstractDao<Curriculum>{
   static CurriculumDao obj;
-  private String filename = "curriculum-v1.8.data";
-  private ArrayList<Curriculum> list;
 
-  public static CurriculumDao getInstance() {
+  public static CurriculumDao getInstance() throws Exception {
     if (obj == null) {
       obj = new CurriculumDao();
+      obj.load();
     }
     return obj;
   }
-  private CurriculumDao() {
-    this.load();
-  }
   
-  @SuppressWarnings("unchecked")
-  private void load() {
-    try (
-      ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.filename));) {
-
-      list = (ArrayList<Curriculum>)in.readObject();
-      
-    } catch(EOFException e) {
-    } catch (Exception e) {
-      System.out.println("강좌 데이터 로딩 중 오류 발생!");
-      list = new ArrayList<>();
-    }
-  }
-  
-  public void save() throws Exception {
-    try (
-      ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.filename));) {
-    
-      out.writeObject(list);
-      
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  private CurriculumDao() throws Exception {
+    super("contact -v1.9.data");
   }
   
   public ArrayList<Curriculum> getList() {

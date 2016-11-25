@@ -10,20 +10,19 @@ import bitcamp.java89.ems.server.dao.CurriculumDao;
 import bitcamp.java89.ems.server.vo.Curriculum;
 
 public class CurriculumDeleteController implements Command {
-  private CurriculumDao curriculumDao;
-  
-
-
-  public CurriculumDeleteController() {
-    curriculumDao = CurriculumDao.getInstance();
-  }
 
   public void service(HashMap<String,String> paramMap, PrintStream out){
-    if (!curriculumDao.existCurriculumName(paramMap.get("name"))) {
-      out.println("해당 강좌명이 없습니다.");
-      return;
+    try {
+      CurriculumDao curriculumDao = CurriculumDao.getInstance();
+      if (!curriculumDao.existCurriculumName(paramMap.get("name"))) {
+        out.println("해당 강좌명이 없습니다.");
+        return;
+      }
+      curriculumDao.delete(paramMap.get("name"));
+      out.println("해당 강좌명을 삭제 완료하였습니다.");
+    } catch (Exception e) {
+      out.println("작업중 예외가 발생하였습니다.");
+      e.printStackTrace();
     }
-    curriculumDao.delete(paramMap.get("name"));
-    out.println("해당 강좌명을 삭제 완료하였습니다.");
   }
 }

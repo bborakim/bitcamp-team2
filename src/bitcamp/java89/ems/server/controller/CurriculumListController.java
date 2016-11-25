@@ -10,15 +10,10 @@ import bitcamp.java89.ems.server.dao.CurriculumDao;
 import bitcamp.java89.ems.server.vo.Curriculum;
 
 public class CurriculumListController implements Command {
-  private CurriculumDao curriculumDao;
-  
-
-
-  public CurriculumListController() {
-    curriculumDao = CurriculumDao.getInstance();
-  }
-
+ 
   public void service(HashMap<String,String> paramMap, PrintStream out){
+    try {
+      CurriculumDao curriculumDao = CurriculumDao.getInstance();
     ArrayList<Curriculum> list = curriculumDao.getList();
     for(Curriculum curriculum : list) {
       out.printf("%s, %s, %s, %s, %s\n",
@@ -27,6 +22,10 @@ public class CurriculumListController implements Command {
         curriculum.getBenefit(),
         curriculum.getTarget(),
         curriculum.getDocument());
+    }
+    } catch (Exception e) {
+      out.println("작업중 예외가 발생하였습니다.");
+      e.printStackTrace();
     }
   }
 }
