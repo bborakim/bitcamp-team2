@@ -9,26 +9,26 @@ import bitcamp.java89.ems.server.dao.StudentDao;
 import bitcamp.java89.ems.server.vo.Student;
 
 public class StudentListController implements Command {
-  private StudentDao studentDao;
 
+  public void service(HashMap<String, String> paramMap, PrintStream out) {
+    try {
+      StudentDao studentDao = StudentDao.getInstance();
 
-  public StudentListController() {
-    studentDao = StudentDao.getInstance();
-  }
-
-  // delete?id=aaa
-  public void service(HashMap<String,String> paramMap, PrintStream out) {
-    ArrayList<Student> list = studentDao.getList();
-    for (Student student : list) {
-      out.printf("%s,%s,%s,%s,%s,%s,%d,%s\n",
-          student.getUserId(),
-          student.getPassword(),
-          student.getName(),
-          student.getTel(),
-          student.getEmail(),
-          ((student.isWorking())?"yes":"no"),
-          student.getBirthYear(),
-          student.getSchool());
+      ArrayList<Student> list = studentDao.getList();
+      for (Student student : list) {
+        out.printf("%s,%s,%s,%s,%s,%s,%d,%s\n",
+            student.getUserId(),
+            student.getPassword(),
+            student.getName(),
+            student.getTel(),
+            student.getEmail(),
+            ((student.isWorking())?"yes":"no"),
+            student.getBirthYear(),
+            student.getSchool());
+      }
+    } catch (Exception e) {
+      out.println("[Student] 작업중 예외 발생");
+      e.printStackTrace();
     }
   }
 }
