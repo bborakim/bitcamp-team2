@@ -1,63 +1,22 @@
 package bitcamp.java89.ems.server.dao;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import bitcamp.java89.ems.server.vo.Textbook;
 
-public class TextbookDao {
+public class TextbookDao extends AbstractDao<Textbook> {
   static TextbookDao obj;
-  private String filename = "Textbook_v1.8.data";
-  private ArrayList<Textbook> list;
   
-  public static TextbookDao getInstance() {
+  public static TextbookDao getInstance() throws Exception {
     if (obj == null) {
       obj = new TextbookDao();
+      obj.load();
     }
     return obj;
   }
 
-  private TextbookDao() {
-    this.load();
-  }
-  
-  @SuppressWarnings("unchecked")
-  private void load() {
-    FileInputStream in0 = null;
-    ObjectInputStream in = null;
-    try {
-      in0 = new FileInputStream(this.filename);
-      in = new ObjectInputStream(in0);
-      
-      list = (ArrayList<Textbook>)in.readObject();
-  
-      
-      // 파일 생성 후 데이터 없음 or 파일을 모두 읽음
-    
-    } catch (EOFException e) {
-    } catch (Exception e) {
-      System.out.println("데이터 로딩 중 오류 발생!");
-      list = new ArrayList<>();
-    } finally {
-      try {
-        in.close();
-        in0.close();
-      } catch (Exception e) {}
-    }
-  }
-  
-  public void save() throws Exception {
-      FileOutputStream out0 = new FileOutputStream(filename);
-      ObjectOutputStream out = new ObjectOutputStream(out0);
-
-      out.writeObject(list);
-      
-      out.close();
-      out0.close();
+  private TextbookDao() throws Exception {
+    super("Textbook-v1.9.data");
   }
   
   public ArrayList<Textbook> getList() {
